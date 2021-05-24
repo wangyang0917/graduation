@@ -1,0 +1,71 @@
+<view>
+    <view class="margin-top-bar">
+        <uni-nav-bar vue-id="50d90019-1" left-text="返回" left-icon="arrowleft" title="{{objId==-1?'新增订购':'订购详情'}}" data-event-opts="{{[['^clickLeft',[['back']]]]}}" bind:clickLeft="__e" bind:__l="__l"></uni-nav-bar>
+        <view class="form" style="color:#8F8F94;">
+            <view class="flex a-center j-center" style="background-color:#FFFFFF;padding:0.5px 15px;min-height:50px;border-bottom:0.5px solid #eee;">
+                <view style="background-color:#FFFFFF;padding-right:15px;width:50px;">图书</view>
+                <view class="select-top" style="background-color:#FFFFFF;width:100%;">
+                    <ld-select vue-id="50d90019-2" list="{{bookList}}" label-key="name" value-key="id" placeholder="请选择图书" value="{{taskObj.bookId}}" data-event-opts="{{[['^change',[['bookChange']]],['^input',[['__set_model',['$0','bookId','$event',[]],['taskObj']]]]]}}" bind:change="__e" bind:input="__e" bind:__l="__l"></ld-select>
+                </view>
+            </view>
+            <view class="cu-form-group">
+                <view class="title" style="width:100px;">开始时间</view>
+                <uni-datetime-picker bind:input="__e" style="width:100%;" vue-id="50d90019-3" start="2010-6-10 08:30:30" value="{{taskObj.startTime}}" data-event-opts="{{[['^input',[['__set_model',['$0','startTime','$event',[]],['taskObj']]]]]}}" bind:__l="__l"></uni-datetime-picker>
+            </view>
+            <view class="cu-form-group">
+                <view class="title" style="width:100px;">结束时间</view>
+                <uni-datetime-picker bind:input="__e" style="width:100%;" vue-id="50d90019-4" start="2010-6-10 08:30:30" value="{{taskObj.endTime}}" data-event-opts="{{[['^input',[['__set_model',['$0','endTime','$event',[]],['taskObj']]]]]}}" bind:__l="__l"></uni-datetime-picker>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">图书描述</view>
+                <textarea maxlength="-1" placeholder="图书描述" data-event-opts="{{[['input',[['__set_model',['$0','remark','$event',[]],['taskObj']]]]]}}" value="{{taskObj.remark}}" bindinput="__e"></textarea>
+            </view>
+            <view style="background-color:#FFFFFF;display:flex;align-items:center;justify-content:center;border-top:0.5px solid #eee;padding:0.5px 15px;">
+                <view style="text-align:justify;padding-right:15px;position:relative;height:30px;line-height:30px;">
+                    配图
+                </view>
+                <view style="flex:1;text-align:center;">
+                    <block wx:if="{{taskObj.photo!=''}}">
+                        <view class="avatar">
+                            <image style="width:100px;height:100px;border-radius:50%;" src="{{webUrl+taskObj.photo}}" data-event-opts="{{[['tap',[['ChooseImage',['$event']]]]]}}" bindtap="__e"></image>
+                        </view>
+                    </block>
+                    <block wx:if="{{taskObj.photo==''}}">
+                        <view class="avatar">
+                            <image class="img" style="width:100px;height:100px;" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F02%2F07%2F88%2F599e996616ab5_610.jpg&refer=http%3A%2F%2Fpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1622992153&t=7e1bf07a3b2513c91f50055f6955b680" data-event-opts="{{[['tap',[['ChooseImage',['$event']]]]]}}" bindtap="__e"></image>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <block wx:if="{{userObj.id==taskObj.userId||objId==-1}}">
+            <view class="buttonWrapper">
+                <button data-event-opts="{{[['tap',[['save']]]]}}" class="cu-btn round bg-gradual-green buttonClass" bindtap="__e">
+                    保存
+                </button>
+            </view>
+        </block>
+        <block wx:if="{{userObj.type==1&&taskObj.status==2}}">
+            <view class="buttonWrapper">
+                <button data-event-opts="{{[['tap',[['saveAppointment']]]]}}" class="cu-btn round bg-gradual-green buttonClass" bindtap="__e">
+                    订购
+                </button>
+            </view>
+        </block>
+    </view>
+    <view class="other">
+        <view class="comment">订购列表</view>
+        <block wx:for="{{userAppointmentList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+            <view>
+                <view class="p-1 m-1" style="border-width:0.1rpx;">
+                    <view class="flex a-center ">
+                        <image class="mr-1" style="width:30rpx;height:30rpx;" src="{{webUrl+item.user.photo}}"></image>
+                        <text>{{item.user.userName+":"}}</text>
+                        <text class="p-2">已订购</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <view class="comment-content">没有更多了</view>
+    </view>
+</view>

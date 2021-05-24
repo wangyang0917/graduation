@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-nav-bar": "/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar",
+    "nav-back": "/components/NavBack/index",
+    "m-search": "/components/mehaotian-search-revision/mehaotian-search-revision"
+  }
+}

@@ -1,0 +1,1 @@
+<view class="navback bg-gradual-blue"><text data-event-opts="{{[['tap',[['goBack',['$event']]]]]}}" class="back-icon text-gray cuIcon-back" bindtap="__e"></text></view>

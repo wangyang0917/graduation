@@ -1,0 +1,22 @@
+{
+  "pages": [
+    "pages/main/login",
+    "pages/main/addAppoint",
+    "pages/main/addBook",
+    "pages/main/stuHome",
+    "pages/main/teaHome",
+    "pages/main/newsView",
+    "pages/main/add"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "订书帮",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,16 @@
+.navback{
+	width: 100%;
+	height: 45px;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.navback .back-icon{
+	color: #FFFFFF;
+	font-size: 24px;
+	margin-left: 30rpx;
+}
+

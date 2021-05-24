@@ -1,0 +1,313 @@
+<view>
+    <view>
+        <scroll-view style="padding-bottom:90rpx;" scroll-y="{{true}}">
+            <block wx:if="{{PageCur=='tabbar1'}}">
+                <view style="margin-bottom:60px;">
+                    <view class="margin-top-bar">
+                        <uni-nav-bar vue-id="2943bc14-1" left-text="返回" left-icon="arrowleft" title="首页" data-event-opts="{{[['^clickLeft',[['back']]]]}}" bind:clickLeft="__e" bind:__l="__l"></uni-nav-bar>
+                    </view>
+                    <swiper class="card-swiper round-dot" indicator-dots="{{true}}" circular="{{true}}" autoplay="{{true}}" interval="5000" duration="500" indicator-color="#8799a3" indicator-active-color="#0081ff" data-event-opts="{{[['change',[['cardSwiper',['$event']]]]]}}" bindchange="__e">
+                        <block wx:for="{{swiperList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                            <swiper-item class="{{[cardCur==index?'cur':'']}}">
+                                <view class="swiper-item">
+                                    <image src="{{item.url}}" mode="aspectFill" image="{{true}}"></image>
+                                </view>
+                            </swiper-item>
+                        </block>
+                    </swiper>
+                    <view class="cu-list menu-avatar">
+                        <block wx:for="{{newsList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                            <view class="cu-item" style="min-height:80px;">
+                                <view class="cu-avatar  lg" style="{{('background-image: url('+webUrl+item.photo+');')}}"></view>
+                                <view data-event-opts="{{[['tap',[['goNewsDetail',['$0'],[[['newsList','',index]]]]]]]}}" class="content" bindtap="__e">
+                                    <view class="text-grey">{{item.name}}</view>
+                                    <view class="text-gray text-sm flex">
+                                        <view class="text-cut">
+                                            <text class="cuIcon-card text-red  margin-right-xs"></text>
+                                            {{''+item.remark+''}}
+                                        </view>
+                                    </view>
+                                    <view class="text-gray text-sm">
+                                        {{item.createTimeDesc+''}}
+                                    </view>
+                                </view>
+                                <view class="action"></view>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{PageCur=='tabbar2'}}">
+                <view>
+                    <view class="margin-top-bar">
+                        <uni-nav-bar vue-id="2943bc14-2" left-text="返回" left-icon="arrowleft" title="订购申请" rightIcon="plus" data-event-opts="{{[['^clickLeft',[['back']]],['^clickRight',[['goAddApooint']]]]}}" bind:clickLeft="__e" bind:clickRight="__e" bind:__l="__l"></uni-nav-bar>
+                    </view>
+                    <view>
+                        <view class="cu-list menu-avatar">
+                            <block wx:for="{{appointmentList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                                <block wx:if="{{item.userId==userObj.id}}">
+                                    <view class="{{['cu-item',modalName=='move-box-'+index?'move-cur':'']}}" style="min-height:120px;" data-target="{{'move-box-'+index}}" data-event-opts="{{[['touchstart',[['ListTouchStart',['$event']]]],['touchmove',[['ListTouchMove',['$event']]]],['touchend',[['ListTouchEnd',['$event']]]]]}}" bindtouchstart="__e" bindtouchmove="__e" bindtouchend="__e">
+                                        <block wx:if="{{item.photo==''}}">
+                                            <view class="cu-avatar round lg" style="{{'background-image:'+('url(https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=858990142,882128124&fm=26&gp=0.jpg)')+';'}}"></view>
+                                        </block>
+                                        <block wx:if="{{item.photo!=''}}">
+                                            <view class="cu-avatar round lg" style="{{('background-image: url('+webUrl+item.photo+');')}}"></view>
+                                        </block>
+                                        <view class="content">
+                                            <view class="text-grey">{{item.name}}</view>
+                                            <view class="text-gray text-sm flex">
+                                                <view class="text-cut">
+                                                    <text class="cuIcon-card text-red  margin-right-xs"></text>
+                                                    {{''+item.remark+''}}
+                                                </view>
+                                            </view>
+                                            <view class="text-gray text-sm">
+                                                {{"开始时间:"+item.startTime+''}}
+                                            </view>
+                                            <view class="text-gray text-sm">
+                                                {{"结束时间:"+item.endTime+''}}
+                                            </view>
+                                        </view>
+                                        <view class="action" style="margin-right:20rpx;">
+                                            <view class="text-grey text-xs"></view>
+                                            <view class="cu-tag round bg-grey sm">
+                                                {{''+(item.status==1?'待审批':item.status==2?'审批通过':item.status==3?'审批不通过':item.status==4?'已取消':'')+''}}
+                                            </view>
+                                        </view>
+                                        <view class="move">
+                                            <view data-event-opts="{{[['tap',[['viewAppoint',['$0'],[[['appointmentList','',index]]]]]]]}}" class="bg-green" bindtap="__e">
+                                                查看
+                                            </view>
+                                            <block wx:if="{{item.status==1&&item.userId==userObj.id}}">
+                                                <view data-event-opts="{{[['tap',[['changeAppointState',['$0',4],[[['appointmentList','',index]]]]]]]}}" class="bg-blue" bindtap="__e">
+                                                    取消
+                                                </view>
+                                            </block>
+                                            <block wx:if="{{item.status==1&&item.userId==userObj.id}}">
+                                                <view data-event-opts="{{[['tap',[['delAppoint',['$0'],[[['appointmentList','',index]]]]]]]}}" class="bg-red" bindtap="__e">
+                                                    删除
+                                                </view>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </block>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{PageCur=='tabbar4'}}">
+                <view>
+                    <view class="margin-top-bar">
+                        <uni-nav-bar vue-id="2943bc14-3" left-text="返回" left-icon="arrowleft" title="图书" rightIcon="plus" data-event-opts="{{[['^clickLeft',[['back']]],['^clickRight',[['goAddBook']]]]}}" bind:clickLeft="__e" bind:clickRight="__e" bind:__l="__l"></uni-nav-bar>
+                    </view>
+                    <view>
+                        <view class="flex a-center j-center" style="line-height:45px;background-color:#FFFFFF;border-bottom:0.5px solid #ddd;">
+                            <view data-event-opts="{{[['tap',[['goTap',[1]]]]]}}" class="{{[myTab==1?'text-green border-bottom':'']}}" style="margin:0 5px;width:60px;text-align:center;" bindtap="__e">
+                                全部图书
+                            </view>
+                            <view data-event-opts="{{[['tap',[['goTap',[2]]]]]}}" class="{{[myTab==2?'text-green border-bottom':'']}}" style="margin:0 5px;width:60px;text-align:center;" bindtap="__e">
+                                我的
+                            </view>
+                        </view>
+                        <block wx:if="{{myTab==1}}">
+                            <view class="cu-list menu-avatar">
+                                <block wx:for="{{bookList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                                    <view class="{{['cu-item',modalName=='move-box-'+index?'move-cur':'']}}" style="min-height:100px;" data-target="{{'move-box-'+index}}" data-event-opts="{{[['touchstart',[['ListTouchStart',['$event']]]],['touchmove',[['ListTouchMove',['$event']]]],['touchend',[['ListTouchEnd',['$event']]]]]}}" bindtouchstart="__e" bindtouchmove="__e" bindtouchend="__e">
+                                        <block wx:if="{{item.photo==''}}">
+                                            <view class="cu-avatar round lg" style="{{'background-image:'+('url(https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=858990142,882128124&fm=26&gp=0.jpg)')+';'}}"></view>
+                                        </block>
+                                        <block wx:if="{{item.photo!=''}}">
+                                            <view class="cu-avatar round lg" style="{{('background-image: url('+webUrl+item.photo+');')}}"></view>
+                                        </block>
+                                        <view class="content">
+                                            <view class="text-grey">{{item.name}}</view>
+                                            <view class="text-gray text-sm flex">
+                                                <view class="text-cut">
+                                                    <text class="cuIcon-card text-red  margin-right-xs"></text>
+                                                    {{''+item.remark+''}}
+                                                </view>
+                                            </view>
+                                            <view class="text-gray text-sm">
+                                                {{item.createTimeDesc+''}}
+                                            </view>
+                                        </view>
+                                        <view class="action" style="margin-right:20rpx;">
+                                            <view class="text-grey text-xs"></view>
+                                            <view class="cu-tag round bg-grey sm">
+                                                {{''+(item.status==1?'待审批':item.status==2?'审批通过':item.status==3?'审批不通过':item.status==4?'已取消':'')+''}}
+                                            </view>
+                                        </view>
+                                        <view class="move">
+                                            <view data-event-opts="{{[['tap',[['viewBook',['$0'],[[['bookList','',index]]]]]]]}}" class="bg-green" bindtap="__e">
+                                                查看
+                                            </view>
+                                            <block wx:if="{{item.status==1&&item.userId==userObj.id}}">
+                                                <view data-event-opts="{{[['tap',[['changeState',['$0',4],[[['bookList','',index]]]]]]]}}" class="bg-blue" bindtap="__e">
+                                                    取消
+                                                </view>
+                                            </block>
+                                            <block wx:if="{{item.status==1&&item.userId==userObj.id}}">
+                                                <view data-event-opts="{{[['tap',[['delBook',['$0'],[[['bookList','',index]]]]]]]}}" class="bg-red" bindtap="__e">
+                                                    删除
+                                                </view>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </block>
+                            </view>
+                        </block>
+                        <block wx:if="{{myTab==2}}">
+                            <view class="cu-list menu-avatar">
+                                <block wx:for="{{myBookList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                                    <view class="{{['cu-item',modalName=='move-box-'+index?'move-cur':'']}}" style="min-height:110px;" data-target="{{'move-box-'+index}}" data-event-opts="{{[['touchstart',[['ListTouchStart',['$event']]]],['touchmove',[['ListTouchMove',['$event']]]],['touchend',[['ListTouchEnd',['$event']]]]]}}" bindtouchstart="__e" bindtouchmove="__e" bindtouchend="__e">
+                                        <block wx:if="{{item.photo==''}}">
+                                            <view class="cu-avatar round lg" style="{{'background-image:'+('url(https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=858990142,882128124&fm=26&gp=0.jpg)')+';'}}"></view>
+                                        </block>
+                                        <block wx:if="{{item.photo!=''}}">
+                                            <view class="cu-avatar round lg" style="{{('background-image: url('+webUrl+item.photo+');')}}"></view>
+                                        </block>
+                                        <view class="content">
+                                            <view class="text-grey">{{item.name}}</view>
+                                            <view class="text-gray text-sm flex">
+                                                <view class="text-cut">
+                                                    <text class="cuIcon-card text-red  margin-right-xs"></text>
+                                                    {{''+item.remark+''}}
+                                                </view>
+                                            </view>
+                                            <view class="text-gray text-sm">
+                                                {{item.createTimeDesc+''}}
+                                            </view>
+                                        </view>
+                                        <view class="action" style="margin-right:20rpx;">
+                                            <view class="text-grey text-xs"></view>
+                                            <view class="cu-tag round bg-grey sm">
+                                                {{''+(item.status==1?'待审批':item.status==2?'审批通过':item.status==3?'审批不通过':item.status==4?'已取消':'')+''}}
+                                            </view>
+                                        </view>
+                                        <view class="move">
+                                            <view data-event-opts="{{[['tap',[['viewBook',['$0'],[[['myBookList','',index]]]]]]]}}" class="bg-green" bindtap="__e">
+                                                查看
+                                            </view>
+                                            <block wx:if="{{item.status==1&&item.userId==userObj.id}}">
+                                                <view data-event-opts="{{[['tap',[['changeState',['$0',4],[[['myBookList','',index]]]]]]]}}" class="bg-blue" bindtap="__e">
+                                                    取消
+                                                </view>
+                                            </block>
+                                            <block wx:if="{{item.status==1&&item.userId==userObj.id}}">
+                                                <view data-event-opts="{{[['tap',[['delBook',['$0'],[[['myBookList','',index]]]]]]]}}" class="bg-red" bindtap="__e">
+                                                    删除
+                                                </view>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </block>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            
+            </block>
+            <block wx:if="{{PageCur=='tabbar3'}}">
+                <view>
+                    <view class="margin-top-bar">
+                        <uni-nav-bar vue-id="2943bc14-5" left-text="返回" left-icon="arrowleft" title="用户设置" data-event-opts="{{[['^clickLeft',[['back']]]]}}" bind:clickLeft="__e" bind:__l="__l"></uni-nav-bar>
+                    </view>
+                    <view class="avatarWrapper" style="margin-top:80rpx;">
+                        <block wx:if="{{userObj.photo!=''}}">
+                            <view class="avatar">
+                                <image style="width:100px;height:100px;border-radius:50%;" src="{{webUrl+userObj.photo}}" data-event-opts="{{[['tap',[['ChooseImage',['$event']]]]]}}" bindtap="__e"></image>
+                            </view>
+                        </block>
+                        <block wx:if="{{userObj.photo==''}}">
+                            <view class="avatar">
+                                <image class="img" style="width:100px;height:100px;border-radius:50%;" src="../../static/image/5.png" data-event-opts="{{[['tap',[['ChooseImage',['$event']]]]]}}" bindtap="__e"></image>
+                            </view>
+                        </block>
+                    </view>
+                    <view class="form" style="color:#8F8F94;">
+                        <view class="cu-form-group">
+                            <view class="title">用户名</view>
+                            <input placeholder="请输入用户名" name="loginName" data-event-opts="{{[['input',[['__set_model',['$0','loginName','$event',[]],['userObj']]]]]}}" value="{{userObj.loginName}}" bindinput="__e" />
+                        </view>
+                        <view class="cu-form-group">
+                            <view class="title">密码</view>
+                            <input placeholder="请输入密码" name="password" data-event-opts="{{[['input',[['__set_model',['$0','password','$event',[]],['userObj']]]]]}}" value="{{userObj.password}}" bindinput="__e" />
+                        </view>
+                        <view class="cu-form-group">
+                            <view class="title">姓名</view>
+                            <input placeholder="姓名" name="userName" data-event-opts="{{[['input',[['__set_model',['$0','userName','$event',[]],['userObj']]]]]}}" value="{{userObj.userName}}" bindinput="__e" />
+                        </view>
+                        <view class="cu-form-group">
+                            <view class="title">手机号码</view>
+                            <input placeholder="请输入手机号码" name="phone" data-event-opts="{{[['input',[['__set_model',['$0','phone','$event',[]],['userObj']]]]]}}" value="{{userObj.phone}}" bindinput="__e" />
+                        </view>
+                        <view class="cu-form-group">
+                            <view class="title">性别</view>
+                            <input placeholder="请输入性别" name="sex" data-event-opts="{{[['input',[['__set_model',['$0','sex','$event',[]],['userObj']]]]]}}" value="{{userObj.sex}}" bindinput="__e" />
+                        </view>
+                        <view class="cu-form-group">
+                            <view class="title">身份证</view>
+                            <input placeholder="请输入身份证" name="sex" data-event-opts="{{[['input',[['__set_model',['$0','certNo','$event',[]],['userObj']]]]]}}" value="{{userObj.certNo}}" bindinput="__e" />
+                        </view>
+                    </view>
+                    <view class="buttonWrapper">
+                        <button data-event-opts="{{[['tap',[['saveUser']]]]}}" class="cu-btn round bg-gradual-green buttonClass" bindtap="__e">
+                            修改
+                        </button>
+                        <button data-event-opts="{{[['tap',[['quit']]]]}}" class="cu-btn round bg-gradual-green buttonClass" bindtap="__e">
+                            退出
+                        </button>
+                    </view>
+                    <view></view>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+    <view class="cu-bar tabbar bg-white foot">
+        <view class="action" data-cur="tabbar1" data-event-opts="{{[['tap',[['NavChange',['$event']]]]]}}" bindtap="__e">
+            <view class="cuIcon-cu-image">
+                <block wx:if="{{PageCur!='tabbar1'}}">
+                    <image src="/static/image/1.png"></image>
+                </block>
+                <block wx:if="{{PageCur=='tabbar1'}}">
+                    <image src="/static/image/1s.png"></image>
+                </block>
+            </view>
+            <view class="{{[PageCur=='tabbar1'?'text-red':'text-gray']}}">首页</view>
+        </view>
+        <view class="action" data-cur="tabbar4" data-event-opts="{{[['tap',[['NavChange',['$event']]]]]}}" bindtap="__e">
+            <view class="cuIcon-cu-image">
+                <block wx:if="{{PageCur!='tabbar4'}}">
+                    <image src="/static/image/book1.png"></image>
+                </block>
+                <block wx:if="{{PageCur=='tabbar4'}}">
+                    <image src="/static/image/sbook1.png"></image>
+                </block>
+            </view>
+            <view class="{{[PageCur=='tabbar4'?'text-red':'text-gray']}}">图书</view>
+        </view>
+        <view class="action" data-cur="tabbar2" data-event-opts="{{[['tap',[['NavChange',['$event']]]]]}}" bindtap="__e">
+            <view class="cuIcon-cu-image">
+                <block wx:if="{{PageCur!='tabbar2'}}">
+                    <image src="/static/image/2.png"></image>
+                </block>
+                <block wx:if="{{PageCur=='tabbar2'}}">
+                    <image src="/static/image/2s.png"></image>
+                </block>
+            </view>
+            <view class="{{[PageCur=='tabbar2'?'text-red':'text-gray']}}">订购申请</view>
+        </view>
+        <view class="action" data-cur="tabbar3" data-event-opts="{{[['tap',[['NavChange',['$event']]]]]}}" bindtap="__e">
+            <view class="cuIcon-cu-image">
+                <block wx:if="{{PageCur!='tabbar3'}}">
+                    <image src="/static/image/4.png"></image>
+                </block>
+                <block wx:if="{{PageCur=='tabbar3'}}">
+                    <image src="/static/image/4s.png"></image>
+                </block>
+            </view>
+            <view class="{{[PageCur=='tabbar3'?'text-red':'text-gray']}}">我的</view>
+        </view>
+    </view>
+</view>

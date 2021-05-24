@@ -1,0 +1,81 @@
+<view class="bg-img  flex align-center content" style="background-image:url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.nxwwj.cn%2Fupload%2Fimg%2F8tSJ148blYaw3hfP7z7Ze4ryMssEvfFFo2FzVT8MUU4aEsq%2FTH12Bw79RpugtW6NcbHPcnyU4bZgCwU40gkuTZlz4H%2FF4f0zGYsMSlJm-i6lt48QkpJly2-pQkoO7Sh4UqhvUxOL.jpg&refer=http%3A%2F%2Fwww.nxwwj.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1624085514&t=ce8c1cd9f8cb3adaa493dff3b22e9423');">
+    <view class="padding-xl text-white">
+        <view class="text-center padding-xs text-xxl text-bold animate__animated animate__bounce">
+            订书帮
+        </view>
+        <block wx:if="{{loginFormDiv}}">
+            <view class="padding-xs text-lg">
+                <view>
+                    <view class="form" style="color:#8F8F94;">
+                        <view class="cu-form-group inputWrapper">
+                            <view class="title">登录名</view>
+                            <input placeholder="请输入登录名" name="loginName" data-event-opts="{{[['input',[['__set_model',['$0','loginName','$event',[]],['loginForm']]]]]}}" value="{{loginForm.loginName}}" bindinput="__e" />
+                        </view>
+                        <view class="cu-form-group inputWrapper">
+                            <view class="title">密码</view>
+                            <input placeholder="请输入密码" name="password" data-event-opts="{{[['input',[['__set_model',['$0','password','$event',[]],['loginForm']]]]]}}" value="{{loginForm.password}}" bindinput="__e" />
+                        </view>
+                    </view>
+                </view>
+                <view data-event-opts="{{[['tap',[['login',['$event']]]]]}}" class="loginBtn " bindtap="__e">
+                    <text class="btnValue">登录</text>
+                </view>
+                <view class="forgotBtn">
+                    <text data-event-opts="{{[['tap',[['regist',['$event']]]]]}}" class="btnValue" bindtap="__e">
+                        注册
+                    </text>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{registFromDiv}}">
+            <view class="padding-xs text-lg">
+                <view class="form" style="color:#8F8F94;">
+                    <view class="flex a-center j-center" style="background-color:#FFFFFF;padding:0.5px 15px;min-height:50px;border-bottom:0.5px solid #eee;">
+                        <view style="background-color:#FFFFFF;padding-right:15px;width:60px;">
+                            班级
+                        </view>
+                        <view class="select-top" style="background-color:#FFFFFF;width:100%;">
+                            <ld-select vue-id="2808e73a-1" list="{{classesList}}" label-key="name" value-key="id" placeholder="请选择班级" value="{{registFrom.classesId}}" data-event-opts="{{[['^change',[['classesChange']]],['^input',[['__set_model',['$0','classesId','$event',[]],['registFrom']]]]]}}" bind:change="__e" bind:input="__e" bind:__l="__l"></ld-select>
+                        </view>
+                    </view>
+                    <view class="cu-form-group inputWrapper">
+                        <view class="title">登录名</view>
+                        <input placeholder="请输入登录名" name="loginName" data-event-opts="{{[['input',[['__set_model',['$0','loginName','$event',[]],['registFrom']]]]]}}" value="{{registFrom.loginName}}" bindinput="__e" />
+                    </view>
+                    <view class="cu-form-group inputWrapper">
+                        <view class="title">密码</view>
+                        <input placeholder="请输入密码" name="password" data-event-opts="{{[['input',[['__set_model',['$0','password','$event',[]],['registFrom']]]]]}}" value="{{registFrom.password}}" bindinput="__e" />
+                    </view>
+                    <view class="cu-form-group inputWrapper">
+                        <view class="title">姓名</view>
+                        <input placeholder="姓名" name="name" data-event-opts="{{[['input',[['__set_model',['$0','userName','$event',[]],['registFrom']]]]]}}" value="{{registFrom.userName}}" bindinput="__e" />
+                    </view>
+                    <view class="cu-form-group inputWrapper">
+                        <view class="title">身份证号</view>
+                        <input placeholder="身份证号" name="certNo" data-event-opts="{{[['input',[['__set_model',['$0','certNo','$event',[]],['registFrom']]]]]}}" value="{{registFrom.certNo}}" bindinput="__e" />
+                    </view>
+                    <view class="cu-form-group inputWrapper">
+                        <view class="title">工/学号</view>
+                        <input placeholder="工/学号" name="code" data-event-opts="{{[['input',[['__set_model',['$0','code','$event',[]],['registFrom']]]]]}}" value="{{registFrom.code}}" bindinput="__e" />
+                    </view>
+                    <view class="cu-form-group inputWrapper">
+                        <view class="title">手机号码</view>
+                        <input placeholder="手机号码" name="phone" data-event-opts="{{[['input',[['__set_model',['$0','phone','$event',[]],['registFrom']]]]]}}" value="{{registFrom.phone}}" bindinput="__e" />
+                    </view>
+                    <view class="cu-form-group inputWrapper">
+                        <view class="title">性别</view>
+                        <input placeholder="性别" name="sex" data-event-opts="{{[['input',[['__set_model',['$0','sex','$event',[]],['registFrom']]]]]}}" value="{{registFrom.sex}}" bindinput="__e" />
+                    </view>
+                </view>
+                <view class="forgotBtn">
+                    <text data-event-opts="{{[['tap',[['registSave',['$event']]]]]}}" class="btnValue" bindtap="__e">
+                        确定注册
+                    </text>
+                </view>
+                <view data-event-opts="{{[['tap',[['relogin',['$event']]]]]}}" class="loginBtn" bindtap="__e">
+                    <text class="btnValue">返回登录</text>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

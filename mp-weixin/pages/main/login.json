@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "ld-select": "/components/ld-select/ld-select"
+  }
+}

@@ -1,0 +1,42 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.pro'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+    maven { url 'https://maven.aliyun.com/repository/spring/'}
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'mysql:mysql-connector-java'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile 'mysql:mysql-connector-java:8.0.23'
+    compile group: 'com.baomidou', name: 'mybatis-plus-boot-starter', version: '3.4.1'
+    compile 'org.springframework.boot:spring-boot-starter-jdbc:2.4.3'
+    compile 'com.baomidou:mybatis-plus-generator:3.4.1'
+    compile 'org.freemarker:freemarker:2.3.31'
+    compile 'org.apache.velocity:velocity-engine-core:2.2'
+    compile 'com.ibeetl:beetl:3.3.2.RELEASE'
+    compile 'com.alibaba:fastjson:1.2.75'
+    compile 'io.springfox:springfox-swagger2:2.9.2'
+    compile 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.4.3'
+}
+
+test {
+    useJUnitPlatform()
+}
